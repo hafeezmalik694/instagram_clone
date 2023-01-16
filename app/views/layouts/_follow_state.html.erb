@@ -1,0 +1,7 @@
+<% if current_user.followings.include?(user) %>
+<%= button_to "UnFollow", unfollow_path(user_id: user.id), class: "btn btn-danger", method: :delete, data: {turbo: false} %>
+<% elsif current_user.waiting_followings.include?(user) %>
+<%= button_to "Cancel Request", cancel_request_path(user_id: user.id), class: "btn btn-secondary", method: :delete, data: {turbo: false} %>
+<% elsif current_user != user %>
+<%= button_to "Follow", follow_path(user_id: user.id), class: "btn btn-primary", method: :post, data: {turbo: false} %>
+<% end %>

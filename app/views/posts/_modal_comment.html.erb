@@ -1,0 +1,21 @@
+<div id="post<%= comment.post.id%>ModalComment<%= comment.id %>">
+    <div class="d-flex justify-content-between">
+        <div class="d-flex">
+            <%= render "layouts/user_profile_pic", user: comment.user %>
+            <div class="d-flex flex-column mx-2 justify-content-center">
+                <%= link_to user_path(id: comment.user_id), data:{turbo: false} do %>
+                <small class="fw-bold"
+                    style="max-width: 10rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><span
+                        class="fw-bold"><%=comment.user.username%> </small>
+                <% end %>
+                <small> <%= comment.body%></small>
+                <small class="text-muted"><%=time_ago_in_words(comment.created_at)%></small>
+            </div>
+        </div>
+        <% if comment.user == current_user %>
+        <%= button_to comment_path(id: comment.id), method: :delete, style: "background:none; border:none" do %>
+        <i class="fa fa-times"></i>
+        <% end %>
+        <% end %>
+    </div>
+</div>

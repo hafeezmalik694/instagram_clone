@@ -1,0 +1,76 @@
+<div class="my-3" id="<%= dom_id post %>">
+  <div class="card" style="width: 25rem;">
+    <div class="card-header bg-white">
+      <div class="d-flex justify-content-between">
+        <%= link_to user_path(id: post.user_id), class: "text-dark", style: "text-decoration:none;" do %>
+        <div>
+          <%= render "layouts/user_profile_pic", user: post.user %>
+          <span class="fw-bold mx-2"> <%= post.post_user_name %> </span>
+        </div>
+        <% end %>
+        <% if current_user == post.user%>
+        <div>
+          <div class="dropdown">
+            <a class="text-dark fs-4" style="text-decoration:none" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              ...
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <%= button_to "Delete Post", post_path(id: post.id),class: "dropdown-item", style: "text-decoration:none;", method: :delete %>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="card-body">
+      <div id="post<%=post.id%>_images" class="carousel slide" data-bs-ride="true">
+        <div class="carousel-inner">
+          <% post.images.each_with_index do |image, index| %>
+          <div class="carousel-item <%= index == 0 ? "active" : ''%>" style="height: 25rem">
+            <%= image_tag image, class: "d-block w-100", style: "max-height: 100%; object-fit: cover;"%>
+          </div>
+          <% end %>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#post<%=post.id%>_images"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#post<%=post.id%>_images"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+        <div class="carousel-indicators" style="position: static;">
+          <% post.images.each_with_index do |image, index| %>
+          <button type="button" data-bs-target="#post<%=post.id%>_images" data-bs-slide-to="<%= index %>"
+            class=" bg-dark <%= index == 0 ? "active" : ''%>" <%= index == 0 ?  'aria-current="true"' : ""%>
+            aria-label=" Slide <%= index + 1 %>"></button>
+          <% end %>
+        </div>
+      </div>
+      <%= render "posts/post_actions", post: post %>
+      <p class="card-text"><span class="fw-bold"> <%= post.post_user_name %></span>: <%= post.caption%></p>
+      <small> <%= time_ago_in_words(post.created_at)%></small>
+    </div>
+    <div class="mx-2">
+      <%= render "posts/post_comments", post: post %>
+    </div>
+    <%= form_with url: comments_path, method: :post, data: {controller: "comments", action: "turbo:submit-end->comments#reset"} do |f| %>
+    <div class="card-footer d-flex justify-content-between bg-white">
+      <%= f.hidden_field :post_id, value: post.id %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.text_area :body, placeholder: "Add a comment.", class:"w-75",style: "border: none"%>
+      <%= f.submit "Post", class: "text-primary fw-bold", style: "background: none; border:none"%>
+    </div>
+    <% end %>
+  </div>
+</div>
+<script>
+  document.getElementById("post<%=post.id%>_images").addEventListener("dblclick", function () {
+    document.getElementById("post<%=post.id%>Btn").click();
+  })
+</script>

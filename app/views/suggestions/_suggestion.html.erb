@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-between">
+    <div class="d-flex">
+        <%= link_to user_path(id: user.id), class: "text-dark", style: "text-decoration:none;", data: {turbo: false} do %>
+        <%= render "layouts/user_profile_pic", user: user %>
+        <div class="d-flex flex-column mx-2">
+            <small class="fw-bold"
+                style="max-width: 10rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><%= user.username%></small>
+            <small class="text-muted"
+                style="font-size: 0.7rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 10rem">suggested
+                for
+                you</small>
+        </div>
+        <% end %>
+    </div>
+    <%= render "layouts/follow_state", user: user %>
+</div>

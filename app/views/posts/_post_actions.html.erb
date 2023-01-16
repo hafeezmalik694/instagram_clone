@@ -1,0 +1,15 @@
+<%= turbo_frame_tag "post#{post.id}actions" do %>
+<div class="d-flex justify-content-start align-items-center gap-1 mb-2">
+    <%= button_to toggle_like_path(post_id: post.id), method: :post, style: "border: none; background: none;", id: "post#{post.id}Btn" do %>
+    <i class="<%= liked_by_user?(post) ? "fa-solid color-red" : "fa-regular" %> fa-heart fa-xl"></i>
+    <% end %>
+    <a href="#" data-bs-toggle="modal" data-bs-target="#post<%=post.id%>commentModal" style="text-decoration:none;">
+        <i class="fa-regular fa-comment fa-xl fa-flip-horizontal text-dark"></i>
+    </a>
+</div>
+<small class="fw-bold" data-bs-toggle="modal"
+    data-bs-target="#post<%=post.id%>likes"><%= pluralize(post.likes.count, "like")%>
+</small>
+<%= render "posts/show_likes", post: post%>
+
+<% end %>

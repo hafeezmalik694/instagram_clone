@@ -1,0 +1,18 @@
+<% if notice && notice.is_a?(Array) %>
+<%notice.each do |a| %>
+
+<div class="alert alert-success">
+    <p><%= a %></p>
+</div>
+<% end %>
+
+<% end %>
+
+<% if alert && alert.is_a?(Array) %>
+<%alert.each do |a| %>
+<div class="alert alert-danger">
+    <p><%= a %></p>
+</div>
+<% end %>
+
+<% end %>

@@ -1,0 +1,13 @@
+<div class="border" style="width: 20rem">
+    <div class="d-flex flex-row justify-content-between">
+        <p class="text-muted fw-bold">Suggestions for you.</p>
+        <%= link_to root_path, style:"text-decoration: none;" do %>
+        <small class="fw-bold text-dark px-2"> see all</small>
+        <% end %>
+    </div>
+    <div class="d-flex flex-column gap-3 px-2">
+        <% @suggestions.each do |suggestion| %>
+        <%= render "suggestions/suggestion", user: suggestion%>
+        <%end%>
+    </div>
+</div>

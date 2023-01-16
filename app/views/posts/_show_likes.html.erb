@@ -1,0 +1,19 @@
+  <!-- Modal -->
+  <div class="modal fade" id="post<%=post.id%>likes" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Post Likes</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <div class="d-flexd-d-flex-column">
+                      <% post.likers.each do |liker| %>
+                      <%= render "posts/liker", liker: liker%>
+                      <% end %>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>

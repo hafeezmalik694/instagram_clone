@@ -1,0 +1,11 @@
+<div class="d-flex my-4 justify-content-center gap-5">
+    <div class="d-flex flex-column gap-3">
+        <%= render "stories/story_list" %>
+        <div class="flex flex-column">
+            <%@posts.each do |post| %>
+            <%= render "posts/post", post: post %>
+            <% end %>
+        </div>
+    </div>
+    <%= render "suggestions/suggestion_list" %>
+</div>

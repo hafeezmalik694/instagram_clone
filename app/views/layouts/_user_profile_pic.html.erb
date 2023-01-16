@@ -1,0 +1,5 @@
+<% if user.profile_pic.attached? %>
+<%= image_tag (user.profile_pic), class: "img-thumbnail rounded-circle", style: "width:2rem" %>
+<% else %>
+<%= image_tag ('fb-logo.webp') , class: "img-thumbnail rounded-circle", style: "width:2rem"%>
+<% end %>

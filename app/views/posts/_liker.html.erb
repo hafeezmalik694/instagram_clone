@@ -1,0 +1,12 @@
+<div class="d-flex justify-content-between">
+    <div class="d-flex">
+        <%= render "layouts/user_profile_pic", user: liker %>
+        <div class="d-flex flex-column mx-2 justify-content-center">
+            <%= link_to user_path(id: liker.id), class: "text-dark", style: "text-decoration:none;", data: {turbo: false} do %>
+            <small class="fw-bold"
+                style="max-width: 10rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><%= liker.username%></small>
+            <% end %>
+        </div>
+    </div>
+    <%= render "layouts/follow_state", user: liker %>
+</div>
